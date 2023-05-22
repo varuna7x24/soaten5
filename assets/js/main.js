@@ -5,7 +5,7 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -114,7 +114,7 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('#navbar').classList.toggle('navbar-mobile')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -123,7 +123,7 @@
   /**
    * Mobile nav dropdowns activate
    */
-  on('click', '.navbar .dropdown > a', function(e) {
+  on('click', '.navbar .dropdown > a', function (e) {
     if (select('#navbar').classList.contains('navbar-mobile')) {
       e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
@@ -133,7 +133,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -218,4 +218,66 @@
    */
   new PureCounter();
 
+  /**
+   * Query Placa
+   */
+  on('click', '#buy-soat-id', function (e) {
+    let placaInput = select("#placa-id");
+    if (placaInput) {
+      let placaValue = placaInput.value;
+      console.log("Placa:", placaValue);
+      
+      var settings = {
+        "url": "https://07v1ysy3z6.execute-api.us-east-1.amazonaws.com/master/api/",
+        "method": "POST",
+        "timeout": 0,
+        "headers": {
+          "Authority": "07v1ysy3z6.execute-api.us-east-1.amazonaws.com",
+          "Content-Type": "application/json"
+        },
+        "data": JSON.stringify({
+          "operationName": "SOATFunnel",
+          "variables": {
+            "funnelType": "DESKTOP",
+            "funnelName": "soat_bolivar",
+            "applicationData": {
+              "identificationType": "ID",
+              "identification": "111111",
+              "insuranceCompany": "BOLIVAR",
+              "gaCampaing": "(none)",
+              "gaContent": "(none)",
+              "gaSource": "google",
+              "gaMedium": "organic",
+              "gaLandingPage": "https://www.grupor5.com/comprar-soat-en-linea",
+              "gaKeyword": "(none)",
+              "utmCampaign": "(none)",
+              "utmKeyword": "(none)",
+              "utmLandingPage": "https://www.grupor5.com/comprar-soat-en-linea",
+              "utmMedium": "organic",
+              "utmSource": "google",
+              "analyticsClientId": "1153069336.1684714299",
+              "fbclid": "",
+              "gaGclid": "",
+              "isMobile": false,
+              "platform": "Windows",
+              "navigator": "Google Chrome or Chromium",
+              "latitude": "0",
+              "longitude": "0",
+              "vehicleRegistration": placaValue // Utilizamos el valor de la placa aquí
+            }
+          },
+          "query": "mutation SOATFunnel($funnelType: FunnelTypeEnum, $applicationData: OdinApplicationType!, $funnelName: String, $token: String) {\n  soatFunnel(\n    funnelType: $funnelType\n    applicationData: $applicationData\n    funnelName: $funnelName\n    token: $token\n  ) {\n    nextStep\n    application {\n      id\n      funnelName\n      originalPrice\n      vehicleBrandName\n      vehicleLineName\n      vehicleModel\n      vehicleRegistration\n      vehicleEngine\n      validityFrom\n      expirationDate\n      offline\n      __typename\n    }\n    token\n    __typename\n  }\n}"
+        }),
+      };
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+    }
+  }, true)
+  
+  
+
+
 })()
+
