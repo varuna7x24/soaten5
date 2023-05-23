@@ -528,6 +528,10 @@ h6 {
   position: relative;
 }
 
+.hero-waves.pay {
+  margin-top: 0px !important;
+}
+
 .wave1 use {
   animation: move-forever1 10s linear infinite;
   animation-delay: -2s;
@@ -579,6 +583,10 @@ h6 {
 
 .card-form h5 {
   color: #ffffff;
+}
+
+.modal-header {
+  border-bottom: none;
 }
 
 /*--------------------------------------------------------------
@@ -1661,4 +1669,83 @@ section {
   padding: 0;
   margin: 0;
   max-height: 20px;
+}
+
+/*--------------------------------------------------------------
+# Form Pay
+--------------------------------------------------------------*/
+#pay .alert-info h4 {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #0d13a1 !important;
+}
+
+#pay .alert-info p {
+  font-size: 11px !important;
+  color: #2b2c42 !important;
+  margin-bottom: 0rem !important;
+}
+
+#pay .alert-info div.text-end p {
+  font-size: 16px !important;
+  color: #fc7108 !important;
+  margin-bottom: 0rem !important;
+}
+
+#pay .card-body h4 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #000000;
+}
+
+#pay .card-body p {
+  font-size: 12px;
+  color: #2c2c2c;
+}
+
+#pay .form-select {
+  border: 1.5px solid #000000;
+}
+
+#pay .form-control {
+  border: 1.5px solid #000000;
+}
+
+#pay .form-check-input {
+  border: 1.5px solid #000000;
+}
+
+#pay .form-check-input:checked  {
+  background-color: #fc7108;
+  border: 1.5px solid #fc7108;
+}
+
+#pay .btn-pay {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #fc7108;
+  --bs-btn-border-color: #fc7108;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #fc7108;
+  --bs-btn-hover-border-color: #fc7108;
+  --bs-btn-focus-shadow-rgb: 49,132,253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #fc7108;
+  --bs-btn-active-border-color: #fc7108;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #fc7108;
+  --bs-btn-disabled-border-color: #fc7108;
+}
+
+#pay .checkout .card-body p {
+  font-size: 12px;
+  color: #2c2c2c;
+}
+#pay .checkout .card-body p span{
+  font-size: 10px;
+  color: #2c2c2c;
+}
+#pay .checkout .card-body .note{
+  font-size: 10px;
+  color: #464646;
 }

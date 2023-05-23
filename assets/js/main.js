@@ -226,57 +226,62 @@
     if (placaInput) {
       let placaValue = placaInput.value;
       console.log("Placa:", placaValue);
-      
+
       var settings = {
-        "url": "https://07v1ysy3z6.execute-api.us-east-1.amazonaws.com/master/api/",
-        "method": "POST",
+        "url": "http://localhost:8069/api/soat/car/" + placaValue,
+        "method": "GET",
         "timeout": 0,
         "headers": {
-          "Authority": "07v1ysy3z6.execute-api.us-east-1.amazonaws.com",
-          "Content-Type": "application/json"
+          "Cookie": "frontend_lang=es; session_id=df9e04a9019a2c0d1107c1e3586cfcf8f87cd04a"
         },
-        "data": JSON.stringify({
-          "operationName": "SOATFunnel",
-          "variables": {
-            "funnelType": "DESKTOP",
-            "funnelName": "soat_bolivar",
-            "applicationData": {
-              "identificationType": "ID",
-              "identification": "111111",
-              "insuranceCompany": "BOLIVAR",
-              "gaCampaing": "(none)",
-              "gaContent": "(none)",
-              "gaSource": "google",
-              "gaMedium": "organic",
-              "gaLandingPage": "https://www.grupor5.com/comprar-soat-en-linea",
-              "gaKeyword": "(none)",
-              "utmCampaign": "(none)",
-              "utmKeyword": "(none)",
-              "utmLandingPage": "https://www.grupor5.com/comprar-soat-en-linea",
-              "utmMedium": "organic",
-              "utmSource": "google",
-              "analyticsClientId": "1153069336.1684714299",
-              "fbclid": "",
-              "gaGclid": "",
-              "isMobile": false,
-              "platform": "Windows",
-              "navigator": "Google Chrome or Chromium",
-              "latitude": "0",
-              "longitude": "0",
-              "vehicleRegistration": placaValue // Utilizamos el valor de la placa aquí
-            }
-          },
-          "query": "mutation SOATFunnel($funnelType: FunnelTypeEnum, $applicationData: OdinApplicationType!, $funnelName: String, $token: String) {\n  soatFunnel(\n    funnelType: $funnelType\n    applicationData: $applicationData\n    funnelName: $funnelName\n    token: $token\n  ) {\n    nextStep\n    application {\n      id\n      funnelName\n      originalPrice\n      vehicleBrandName\n      vehicleLineName\n      vehicleModel\n      vehicleRegistration\n      vehicleEngine\n      validityFrom\n      expirationDate\n      offline\n      __typename\n    }\n    token\n    __typename\n  }\n}"
-        }),
       };
-      
+
       $.ajax(settings).done(function (response) {
-        console.log(response);
+        if (response.success !== true) {
+          console.log(response);
+          let modal = new bootstrap.Modal(document.getElementById('modal-message-id'));
+          let title = select("#modal-title-id");
+          let body = select("#modal-body-id");
+          title.innerHTML = response.title;
+          body.innerHTML = response.message;
+          modal.show()
+        } else {
+          const url = "/soat_seguros_del_estado/precio/index.html?" + new URLSearchParams(response.data).toString();
+          window.location.href = url;
+        }
       });
     }
   }, true)
-  
-  
+
+  /**
+   * Get Data from Form
+   */
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('id') !== false) {
+    let fVehicleRegistration = select("#fVehicleRegistrationId");
+    let originalPrice = select("#originalPriceId");
+    let expirationDate = select("#expirationDateId");
+    let validityFrom = select("#validityFromId");
+    let vehicleRegistration = select("#vehicleRegistrationId");
+    let vehicleBrandName = select("#vehicleBrandNameId");
+    let vehicleModel = select("#vehicleModelId");
+    let vehicleLineName = select("#vehicleLineNameId");
+    let vehicleEngine = select("#vehicleEngineId");
+
+    const formattedPrice = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(params.get('originalPrice'));
+
+    fVehicleRegistration.innerHTML = params.get('vehicleRegistration');
+    originalPrice.innerHTML = formattedPrice;
+    vehicleRegistration.innerHTML = params.get('vehicleRegistration');
+    vehicleBrandName.innerHTML = params.get('vehicleBrandName');
+    vehicleModel.innerHTML = params.get('vehicleModel');
+    vehicleLineName.innerHTML = params.get('vehicleLineName');
+    vehicleEngine.innerHTML = params.get('vehicleEngine');
+    expirationDate.innerHTML = params.get('expirationDate');
+    validityFrom.innerHTML = params.get('validityFrom');
+  }
+
+
 
 
 })()
