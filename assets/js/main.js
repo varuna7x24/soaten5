@@ -280,8 +280,8 @@
     vehicleEngine.innerHTML = params.get('vehicleEngine');
     expirationDate.innerHTML = params.get('expirationDate');
     validityFrom.innerHTML = params.get('validityFrom');
-    var message = "Hola, ¿cómo estás?\nEstoy interesado(a) en el SOAT mi vehículo " + params.get('vehicleRegistration') + ".\n¿Me puedes ayudar?\nGracias.";
-    wpNumber.href = "https://web.whatsapp.com/send?phone=57" + params.get('wpNumber') + "&text=" + message;
+    var message = "Hola, ¿cómo estás?%0AEstoy interesado(a) en el SOAT mi vehículo " + params.get('vehicleRegistration') + ".%0A¿Me puedes ayudar?%0AGracias.";
+    wpNumber.href = "https://api.whatsapp.com/send?phone=57" + params.get('wpNumber') + "&text=" + message;
   }
 
 
