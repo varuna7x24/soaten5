@@ -267,6 +267,7 @@
     let vehicleModel = select("#vehicleModelId");
     let vehicleLineName = select("#vehicleLineNameId");
     let vehicleEngine = select("#vehicleEngineId");
+    let wpNumber = select(".write-wp");
 
     const formattedPrice = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(params.get('originalPrice'));
 
@@ -279,9 +280,9 @@
     vehicleEngine.innerHTML = params.get('vehicleEngine');
     expirationDate.innerHTML = params.get('expirationDate');
     validityFrom.innerHTML = params.get('validityFrom');
+    var message = "Hola, ¿cómo estás?\nEstoy interesado(a) en el SOAT mi vehículo " + params.get('vehicleRegistration') + ".\n¿Me puedes ayudar?\nGracias.";
+    wpNumber.href = "https://web.whatsapp.com/send?phone=57" + params.get('wpNumber') + "&text=" + message;
   }
-
-
 
 
 })()

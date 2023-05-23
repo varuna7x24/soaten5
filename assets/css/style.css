@@ -1715,7 +1715,7 @@ section {
   border: 1.5px solid #000000;
 }
 
-#pay .form-check-input:checked  {
+#pay .form-check-input:checked {
   background-color: #fc7108;
   border: 1.5px solid #fc7108;
 }
@@ -1727,7 +1727,7 @@ section {
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #fc7108;
   --bs-btn-hover-border-color: #fc7108;
-  --bs-btn-focus-shadow-rgb: 49,132,253;
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
   --bs-btn-active-color: #fff;
   --bs-btn-active-bg: #fc7108;
   --bs-btn-active-border-color: #fc7108;
@@ -1741,11 +1741,72 @@ section {
   font-size: 12px;
   color: #2c2c2c;
 }
-#pay .checkout .card-body p span{
+
+#pay .checkout .card-body p span {
   font-size: 10px;
   color: #2c2c2c;
 }
-#pay .checkout .card-body .note{
+
+#pay .checkout .card-body .note {
   font-size: 10px;
   color: #464646;
+}
+
+#pay .list-group {
+  --bs-list-group-color: #212529;
+  --bs-list-group-bg: #ffffff00;
+  --bs-list-group-border-color: rgba(0, 0, 0, 0.125);
+  --bs-list-group-border-width: 0px;
+  --bs-list-group-border-radius: 0.375rem;
+  --bs-list-group-item-padding-x: 1rem;
+  --bs-list-group-item-padding-y: 0.5rem;
+  --bs-list-group-action-color: #495057;
+  --bs-list-group-action-hover-color: #495057;
+  --bs-list-group-action-hover-bg: #f8f9fa;
+  --bs-list-group-action-active-color: #212529;
+  --bs-list-group-action-active-bg: #e9ecef;
+  --bs-list-group-disabled-color: #6c757d;
+  --bs-list-group-disabled-bg: #fff;
+  --bs-list-group-active-color: #fff;
+  --bs-list-group-active-bg: #0d6efd;
+  --bs-list-group-active-border-color: #0d6efd;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-radius: var(--bs-list-group-border-radius);
+}
+
+/*--------------------------------------------------------------
+# Write WP
+--------------------------------------------------------------*/
+.write-wp {
+  padding: 1.5em;
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: 15px;
+  z-index: 996;
+  background: #25D366;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+
+.write-wp i {
+  font-size: 28px;
+  color: #fff;
+  line-height: 0;
+}
+
+.write-wp:hover {
+  background: #128C7E;
+  color: #fff;
+}
+
+.write-wp.active {
+  visibility: visible;
+  opacity: 1;
 }
