@@ -248,9 +248,9 @@
         } else {
           const url = "/soat_seguros_del_estado/precio/index.html?"
           if (window.location.hostname === "varuna7x24.github.io") {
-            const url = "/tusoatya/soat_seguros_del_estado/precio/index.html?" + new URLSearchParams(response.data).toString();
+            url = "/tusoatya/soat_seguros_del_estado/precio/index.html?" + new URLSearchParams(response.data).toString();
           } else {
-            const url = "/soat_seguros_del_estado/precio/index.html?" + new URLSearchParams(response.data).toString();
+            url = "/soat_seguros_del_estado/precio/index.html?" + new URLSearchParams(response.data).toString();
           }
           window.location.href = url;
         }
