@@ -246,6 +246,7 @@
           body.innerHTML = response.message;
           modal.show()
         } else {
+          const url = "/soat_seguros_del_estado/precio/index.html?"
           if (window.location.hostname === "varuna7x24.github.io") {
             const url = "/tusoatya/soat_seguros_del_estado/precio/index.html?" + new URLSearchParams(response.data).toString();
           } else {
