@@ -99,7 +99,7 @@
     <section id="pay" class="faq section-bg">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 col-sm-12 order-2 order-md-1 offset-md-2">
+          <div class="col-md-4 col-sm-12 order-2 order-md-1 offset-md-2 ">
             <div class="card">
               <div class="card-body">
                 <div class="alert alert-info" role="alert">
@@ -187,7 +187,160 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-12 order-1 order-md-2 checkout mb-3">
+          <div class="col-md-4 col-sm-12 order-1 order-md-2 checkout  mb-3">
+            <div class="card mb-2">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-6" style="text-align: left;">
+                    <p><i class="ri-time-line"></i><b id="expirationDateId">2022-08-30</b><br />
+                      <span>Vencimiento SOAT</span>
+                    </p>
+                  </div>
+                  <div class="col-6" style="text-align: right;">
+                    <p><i class="ri-history-line"></i><b id="validityFromId">2023-05-23</b><br />
+                      <span>Inicio nuevo SOAT</span>
+                    </p>
+                  </div>
+                  <div class="col-12">
+                    <p class="note">Por ley el SOAT inicia vigencia al día siguiente de su compra.</p>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <h4 class="">Tu vehículo</h4>
+                  <div class="col-6">
+                    <p class="ms-2">Placa</p>
+                  </div>
+                  <div class="col-6" style="text-align: right;">
+                    <span class="vehicleRegistration" id="vehicleRegistrationId"></span>
+                    </p>
+                  </div>
+                  <div class="col-6">
+                    <p class="ms-2">Marca</p>
+                  </div>
+                  <div class="col-6" style="text-align: right;">
+                    <span id="vehicleBrandNameId"></span>
+                    </p>
+                  </div>
+                  <div class="col-6">
+                    <p class="ms-2">Modelo</p>
+                  </div>
+                  <div class="col-6" style="text-align: right;">
+                    <span id="vehicleModelId"></span>
+                    </p>
+                  </div>
+                  <div class="col-6">
+                    <p class="ms-2">Línea</p>
+                  </div>
+                  <div class="col-6" style="text-align: right;">
+                    <span id="vehicleLineNameId"></span>
+                    </p>
+                  </div>
+                  <div class="col-6">
+                    <p class="ms-2">Cilindraje</p>
+                  </div>
+                  <div class="col-6" style="text-align: right;">
+                    <span id="vehicleEngineId"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><i class="ri-secure-payment-line"></i> Pagos en línea procesados por ePayco o PayU.</li>
+              <li class="list-group-item"><i class="ri-lock-password-line"></i> Tus datos están completamente seguros.</li>
+              <li class="list-group-item"><i class="ri-mail-send-line"></i> Recibe tu póliza por correo.</li>
+            </ul>
+          </div>
+          <div class="col-md-4 col-sm-12 order-2 order-md-1 d-none offset-md-2">
+            <div class="card">
+              <div class="card-body">
+                <div class="alert alert-info" role="alert">
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 class="alert-heading">SOAT para vehiculo placa <strong id="fVehicleRegistrationId"> {{ $placa
+                          }} </strong></h4>
+                    </div>
+                    <div class="col-6">
+                      <p>Precio SOAT por ley </p>
+                    </div>
+                    <div class="col-6 text-end">
+                      <p><strong id="originalPriceId"> {{ $precio }} </strong></p>
+                    </div>
+                  </div>
+                </div>
+                <h4>Ingresa los datos del propietario</h4>
+                <p>
+                  Para poder emitir el SOAT es necesario que los datos de contacto sean del propietario del vehículo
+                </p>
+                <form>
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="typeDocumentId" required>
+                      <option selected value="cc">Cédula de ciudadania</option>
+                      <option value="ce">Cédula de extranjería</option>
+                      <option value="ps">Pasaporte</option>
+                      <option value="ti">Tarjeta de identidad</option>
+                      <option value="rc">Registro civil</option>
+                      <option value="cd">Carné diplomatico</option>
+                    </select>
+                    <label for="typeDocumentId">*Tipo de Documento</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="numberDocumentId" placeholder="Número de documento"
+                      required>
+                    <label for="numberDocumentId">*Número de documento</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="emailId"
+                      placeholder="Correo electrónico del propietario" required>
+                    <label for="emailId">*Correo electrónico del propietario</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="tel" class="form-control" id="phoneId" placeholder="Teléfono celular del propietario"
+                      required>
+                    <label for="phoneId">*Teléfono celular del propietario</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="addressId" placeholder="Dirección" required>
+                    <label for="addressId">*Dirección</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <select class="form-select" id="cityId" required>
+                      <option selected value="none">Ciudad de circulación</option>
+                    </select>
+                    <label for="typeDocumentId">*Ciudad de circulación</label>
+                  </div>
+                  <div class="mb-3">
+                    <label for="typeDocumentId">*Género</label>
+                    <div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sexRadio" id="femRadioId" value="female"
+                          required>
+                        <label class="form-check-label" for="femRadioId">Femenino</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sexRadio" id="malRadioId" value="male"
+                          required>
+                        <label class="form-check-label" for="malRadioId">Mascuilino</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="true" id="acceptTermsId" required>
+                      <label class="form-check-label" for="acceptTermsId">
+                        *Acepto el tratamiento de datos
+                      </label>
+                    </div>
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-pay">Comprar SOAT</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 order-1 order-md-2 d-none checkout mb-3">
             <div class="card mb-2">
               <div class="card-body">
                 <div class="row">

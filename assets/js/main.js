@@ -228,7 +228,7 @@
       console.log("Placa:", placaValue);
 
       var settings = {
-        "url": "http://localhost:8069/api/soat/car/" + placaValue,
+        "url": "https://7x24.konethub.com/api/soat/car/" + placaValue,
         "method": "GET",
         "timeout": 0,
         "headers": {
