@@ -246,7 +246,12 @@
           body.innerHTML = response.message;
           modal.show()
         } else {
-          const url = "/soat_seguros_del_estado/precio/index.html?" + new URLSearchParams(response.data).toString();
+          var domain = window.location.hostname;
+          if (domain === varuna7x24.github.io) {
+            const url = "/tusoatya/soat_seguros_del_estado/precio/index.html?" + new URLSearchParams(response.data).toString();
+          } else {
+            const url = "/soat_seguros_del_estado/precio/index.html?" + new URLSearchParams(response.data).toString();
+          }
           window.location.href = url;
         }
       });
