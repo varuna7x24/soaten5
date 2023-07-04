@@ -99,20 +99,20 @@
     <section id="pay" class="faq section-bg">
       <div class="container">
         <div class="row">
-          <div class="col-md-4 col-sm-12 order-2 order-md-1 offset-md-2 ">
+          <div class="col-md-4 col-sm-12 order-2 order-md-1 offset-md-2 checkout-step1">
             <div class="card">
               <div class="card-body">
                 <div class="alert alert-info" role="alert">
                   <div class="row">
                     <div class="col-12">
-                      <h4 class="alert-heading">SOAT para vehiculo placa <strong id="fVehicleRegistrationId"> {{ $placa
+                      <h4 class="alert-heading">SOAT para vehiculo placa <strong class="vehicleRegistration"> {{ $placa
                           }} </strong></h4>
                     </div>
                     <div class="col-6">
                       <p>Precio SOAT por ley </p>
                     </div>
                     <div class="col-6 text-end">
-                      <p><strong id="originalPriceId"> {{ $precio }} </strong></p>
+                      <p><strong class="originalPrice"> {{ $precio }} </strong></p>
                     </div>
                   </div>
                 </div>
@@ -155,18 +155,18 @@
                     <select class="form-select" id="cityId" required>
                       <option selected value="none">Ciudad de circulación</option>
                     </select>
-                    <label for="typeDocumentId">*Ciudad de circulación</label>
+                    <label for="cityId">*Ciudad de circulación</label>
                   </div>
                   <div class="mb-3">
-                    <label for="typeDocumentId">*Género</label>
+                    <label for="genderId">*Género</label>
                     <div>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexRadio" id="femRadioId" value="female"
+                        <input class="form-check-input" type="radio" name="sexRadio" id="femRadioId" value="FEMALE"
                           required>
                         <label class="form-check-label" for="femRadioId">Femenino</label>
                       </div>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexRadio" id="malRadioId" value="male"
+                        <input class="form-check-input" type="radio" name="sexRadio" id="malRadioId" value="MALE"
                           required>
                         <label class="form-check-label" for="malRadioId">Mascuilino</label>
                       </div>
@@ -181,13 +181,13 @@
                     </div>
                   </div>
                   <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary btn-pay">Comprar SOAT</button>
+                    <a href="#" id="send-form-id" class="btn btn-primary btn-pay">Comprar SOAT</a>
                   </div>
                 </form>
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-sm-12 order-1 order-md-2 checkout  mb-3">
+          <div class="col-md-4 col-sm-12 order-1 order-md-2 checkout mb-3 checkout-step1">
             <div class="card mb-2">
               <div class="card-body">
                 <div class="row">
@@ -219,148 +219,154 @@
                     <p class="ms-2">Marca</p>
                   </div>
                   <div class="col-6" style="text-align: right;">
-                    <span id="vehicleBrandNameId"></span>
+                    <span class="vehicleBrandName"></span>
                     </p>
                   </div>
                   <div class="col-6">
                     <p class="ms-2">Modelo</p>
                   </div>
                   <div class="col-6" style="text-align: right;">
-                    <span id="vehicleModelId"></span>
+                    <span class="vehicleModel"></span>
                     </p>
                   </div>
                   <div class="col-6">
                     <p class="ms-2">Línea</p>
                   </div>
                   <div class="col-6" style="text-align: right;">
-                    <span id="vehicleLineNameId"></span>
+                    <span class="vehicleLineName"></span>
                     </p>
                   </div>
                   <div class="col-6">
                     <p class="ms-2">Cilindraje</p>
                   </div>
                   <div class="col-6" style="text-align: right;">
-                    <span id="vehicleEngineId"></span>
+                    <span class="vehicleEngine"></span>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item"><i class="ri-secure-payment-line"></i> Pagos en línea procesados por ePayco o PayU.</li>
-              <li class="list-group-item"><i class="ri-lock-password-line"></i> Tus datos están completamente seguros.</li>
+              <li class="list-group-item"><i class="ri-secure-payment-line"></i> Pagos en línea procesados por ePayco o
+                PayU.</li>
+              <li class="list-group-item"><i class="ri-lock-password-line"></i> Tus datos están completamente seguros.
+              </li>
               <li class="list-group-item"><i class="ri-mail-send-line"></i> Recibe tu póliza por correo.</li>
             </ul>
           </div>
-          <div class="col-md-4 col-sm-12 order-2 order-md-1 d-none offset-md-2">
+          <div id="method-pay" class="col-md-4 col-sm-12 order-2 order-md-1 offset-md-2  checkout-step2">
             <div class="card">
               <div class="card-body">
                 <div class="alert alert-info" role="alert">
                   <div class="row">
                     <div class="col-12">
-                      <h4 class="alert-heading">SOAT para vehiculo placa <strong id="fVehicleRegistrationId"> {{ $placa
+                      <h4 class="alert-heading">SOAT para vehiculo placa <strong class="vehicleRegistration"> {{
+                          $placa
                           }} </strong></h4>
                     </div>
                     <div class="col-6">
                       <p>Precio SOAT por ley </p>
                     </div>
                     <div class="col-6 text-end">
-                      <p><strong id="originalPriceId"> {{ $precio }} </strong></p>
+                      <p><strong class="originalPrice"> {{ $precio }} </strong></p>
                     </div>
                   </div>
                 </div>
-                <h4>Ingresa los datos del propietario</h4>
+                <h4>¿Cómo prefieres pagar?</h4>
                 <p>
-                  Para poder emitir el SOAT es necesario que los datos de contacto sean del propietario del vehículo
+                  *Antes de seleccionar tu método de pago, recuerda que tienes 60 minutos para realizar tu compra,
+                  pasado este tiempo se cancelará la transacción y tendrás que cotizar nuevamente.
                 </p>
-                <form>
-                  <div class="form-floating mb-3">
-                    <select class="form-select" id="typeDocumentId" required>
-                      <option selected value="cc">Cédula de ciudadania</option>
-                      <option value="ce">Cédula de extranjería</option>
-                      <option value="ps">Pasaporte</option>
-                      <option value="ti">Tarjeta de identidad</option>
-                      <option value="rc">Registro civil</option>
-                      <option value="cd">Carné diplomatico</option>
-                    </select>
-                    <label for="typeDocumentId">*Tipo de Documento</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="numberDocumentId" placeholder="Número de documento"
-                      required>
-                    <label for="numberDocumentId">*Número de documento</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="emailId"
-                      placeholder="Correo electrónico del propietario" required>
-                    <label for="emailId">*Correo electrónico del propietario</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="tel" class="form-control" id="phoneId" placeholder="Teléfono celular del propietario"
-                      required>
-                    <label for="phoneId">*Teléfono celular del propietario</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="addressId" placeholder="Dirección" required>
-                    <label for="addressId">*Dirección</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <select class="form-select" id="cityId" required>
-                      <option selected value="none">Ciudad de circulación</option>
-                    </select>
-                    <label for="typeDocumentId">*Ciudad de circulación</label>
-                  </div>
-                  <div class="mb-3">
-                    <label for="typeDocumentId">*Género</label>
-                    <div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexRadio" id="femRadioId" value="female"
-                          required>
-                        <label class="form-check-label" for="femRadioId">Femenino</label>
+                <div class="card card-method" id="card-method-pse">
+                  <div class="card-header">
+                    <div class="row">
+                      <div class="col-8">
+                        PSE / Débito bancario
                       </div>
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexRadio" id="malRadioId" value="male"
-                          required>
-                        <label class="form-check-label" for="malRadioId">Mascuilino</label>
+                      <div class="col-2 d-flex justify-content-end">
+                        <img src="../../assets/img/pse.png" alt="PSE" class="img-fluid">
+                      </div>
+                      <div class="col-2 d-flex justify-content-center align-items-start">
+                        <i class="ri-checkbox-blank-circle-line"></i>
+                        <i class="ri-checkbox-circle-line d-none"></i>
                       </div>
                     </div>
                   </div>
-                  <div class="mb-3">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="true" id="acceptTermsId" required>
-                      <label class="form-check-label" for="acceptTermsId">
-                        *Acepto el tratamiento de datos
-                      </label>
+                  <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                      <p>*Selecciona tu banco</p>
+                      <select id="bankId" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+
+                      </select>
+                    </blockquote>
+                  </div>
+                </div>
+                <div class="card card-method mt-4" id="card-method-tc">
+                  <div class="card-header">
+                    <div class="row">
+                      <div class="col-8">
+                        Tarjeta de crédito
+                      </div>
+                      <div class="col-2 d-flex justify-content-between tc">
+                        <i class="ri-visa-line"></i>
+                        <i class="ri-mastercard-fill"></i>
+                      </div>
+                      <div class="col-2 d-flex justify-content-center align-items-start">
+                        <i class="ri-checkbox-blank-circle-line"></i>
+                        <i class="ri-checkbox-circle-line  d-none"></i>
+                      </div>
                     </div>
                   </div>
-                  <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary btn-pay">Comprar SOAT</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-12 order-1 order-md-2 d-none checkout mb-3">
-            <div class="card mb-2">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-6" style="text-align: left;">
-                    <p><i class="ri-time-line"></i><b id="expirationDateId">2022-08-30</b><br />
-                      <span>Vencimiento SOAT</span>
-                    </p>
-                  </div>
-                  <div class="col-6" style="text-align: right;">
-                    <p><i class="ri-history-line"></i><b id="validityFromId">2023-05-23</b><br />
-                      <span>Inicio nuevo SOAT</span>
-                    </p>
-                  </div>
-                  <div class="col-12">
-                    <p class="note">Por ley el SOAT inicia vigencia al día siguiente de su compra.</p>
+                  <div class="card-body">
                   </div>
                 </div>
 
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-12 order-1 order-md-2 checkout mb-3  checkout-step2">
+            <div class="card mb-2">
+              <div class="card-body">
+                <h4 class="pay-heading">Resumen de compra</h4>
+                <div class="alert alert-info" role="alert">
+                  <div class="row">
+                    <div class="col-6">
+                      <h4 class="alert-heading">Total a pagar</h4>
+                    </div>
+                    <div class="col-6 text-end">
+                      <p><strong class="originalPrice"> {{ $precio }} </strong></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row p-3">
+                  <div class="col-6">
+                    <p>Aseguradorea</p>
+                  </div>
+                  <div class="col-6 text-end">
+                    <p><strong id="soatCompanyId"> {{ $soatCompany }} </strong></p>
+                  </div>
+                  <div class="col-6">
+                    <p>Método de pago</p>
+                  </div>
+                  <div class="col-6 text-end">
+                    <p><strong id="payMethodId"></strong></p>
+                  </div>
+                </div>
                 <div class="row">
                   <h4 class="">Tu vehículo</h4>
+                  <div class="col-6">
+                    <p class="ms-2">Nombre propietario vehiculo</p>
+                  </div>
+                  <div class="col-6" style="text-align: right;">
+                    <span id="namePartnerId"></span>
+                    </p>
+                  </div>
+                  <div class="col-12">
+                    <p style="font-size: 10px;">Este es el nombre registrado en las bases de datos oficiales, no hay
+                      problema si no es tu nombre,
+                      esto no afecta la validez o las coberturas del SOAT, lo importante es que la placa del vehículo
+                      esté correcta. Si deseas modificar el nombre ingresa a www.RUNT.com o comunícate con nosotros.</p>
+                  </div>
                   <div class="col-6">
                     <p class="ms-2">Placa</p>
                   </div>
@@ -372,44 +378,65 @@
                     <p class="ms-2">Marca</p>
                   </div>
                   <div class="col-6" style="text-align: right;">
-                    <span id="vehicleBrandNameId"></span>
+                    <span class="vehicleBrandName"></span>
                     </p>
                   </div>
                   <div class="col-6">
                     <p class="ms-2">Modelo</p>
                   </div>
                   <div class="col-6" style="text-align: right;">
-                    <span id="vehicleModelId"></span>
+                    <span class="vehicleModel"></span>
                     </p>
                   </div>
                   <div class="col-6">
                     <p class="ms-2">Línea</p>
                   </div>
                   <div class="col-6" style="text-align: right;">
-                    <span id="vehicleLineNameId"></span>
+                    <span class="vehicleLineName"></span>
                     </p>
                   </div>
                   <div class="col-6">
                     <p class="ms-2">Cilindraje</p>
                   </div>
                   <div class="col-6" style="text-align: right;">
-                    <span id="vehicleEngineId"></span>
+                    <span class="vehicleEngine"></span>
                     </p>
                   </div>
                 </div>
+                <div class="d-grid gap-2">
+                  <a href="#" id="actionPayId" class="btn btn-primary btn-pay">Pagar SOAT para <strong
+                      class="vehicleRegistration"></strong></a>
+                </div>
               </div>
             </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><i class="ri-secure-payment-line"></i> Pagos en línea procesados por ePayco o PayU.</li>
-              <li class="list-group-item"><i class="ri-lock-password-line"></i> Tus datos están completamente seguros.</li>
-              <li class="list-group-item"><i class="ri-mail-send-line"></i> Recibe tu póliza por correo.</li>
-            </ul>
           </div>
         </div>
       </div>
       </div>
     </section>
     <!-- End F.A.Q Section -->
+
+    <!-- Modal Hero -->
+    <div class="modal fade text-center" id="modalPayId" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title-id">PSE</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="spinner-grow text-primary" id="modalSnipperPayId" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+            <p id="modalBodyPayId"></p>
+            <div class="d-grid gap-2 d-md-block mt-5">
+              <a href="#" target="_blank" id="btnSpportId" class="btn btn-primary btn-pay">Soporte</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal Hero -->
 
   </main>
   <!-- End #main -->

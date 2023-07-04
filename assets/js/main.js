@@ -165,7 +165,7 @@
   let preloader = select('#preloader');
   if (preloader) {
     window.addEventListener('load', () => {
-      preloader.remove()
+      preloader.classList.add("d-none");
     });
   }
 
@@ -227,8 +227,14 @@
       let placaValue = placaInput.value;
       console.log("Placa:", placaValue);
 
+      let preloader = select('#preloader');
+      if (preloader) {
+        preloader.classList.remove("d-none");
+      }
+
       var settings = {
-        "url": "https://7x24.konethub.com/api/soat/car/" + placaValue,
+        // "url": "https://7x24.konethub.com/api/soat/car/" + placaValue,
+        "url": "http://localhost:8069/api/soat/car/" + placaValue + "/soat-sde/g-adds",
         "method": "GET",
         "timeout": 0,
         "headers": {
@@ -237,6 +243,9 @@
       };
 
       $.ajax(settings).done(function (response) {
+        if (preloader) {
+          preloader.classList.add("d-none");
+        }
         if (response.success !== true) {
           console.log(response);
           let modal = new bootstrap.Modal(document.getElementById('modal-message-id'));
@@ -263,32 +272,236 @@
    */
   const params = new URLSearchParams(window.location.search);
   if (params.get('id') !== false) {
-    let fVehicleRegistration = select("#fVehicleRegistrationId");
-    let originalPrice = select("#originalPriceId");
+    let preloader = select('#preloader');
+    if (preloader) {
+      preloader.classList.remove("d-none");
+    }
+    let VehicleRegistrationElements = document.querySelectorAll('.vehicleRegistration');
+    let originalPriceElements = document.querySelectorAll('.originalPrice');
     let expirationDate = select("#expirationDateId");
     let validityFrom = select("#validityFromId");
-    let vehicleRegistration = select("#vehicleRegistrationId");
-    let vehicleBrandName = select("#vehicleBrandNameId");
-    let vehicleModel = select("#vehicleModelId");
-    let vehicleLineName = select("#vehicleLineNameId");
-    let vehicleEngine = select("#vehicleEngineId");
+    let vehicleBrandNameElements = document.querySelectorAll('.vehicleBrandName');
+    let vehicleModelElements = document.querySelectorAll('.vehicleModel');
+    let vehicleLineNameElements = document.querySelectorAll('.vehicleLineName');
+    let vehicleEngineElements = document.querySelectorAll('.vehicleEngine');
     let wpNumber = select(".write-wp");
+    let btnSpport = select("#btnSpportId");
 
     const formattedPrice = new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(params.get('originalPrice'));
 
-    fVehicleRegistration.innerHTML = params.get('vehicleRegistration');
-    originalPrice.innerHTML = formattedPrice;
-    vehicleRegistration.innerHTML = params.get('vehicleRegistration');
-    vehicleBrandName.innerHTML = params.get('vehicleBrandName');
-    vehicleModel.innerHTML = params.get('vehicleModel');
-    vehicleLineName.innerHTML = params.get('vehicleLineName');
-    vehicleEngine.innerHTML = params.get('vehicleEngine');
+    // VehicleRegistrationElements.innerHTML = params.get('vehicleRegistration');
+    VehicleRegistrationElements.forEach(function (elemento) {
+      elemento.innerHTML = params.get('vehicleRegistration');
+    });
+    originalPriceElements.forEach(function (elemento) {
+      elemento.innerHTML = formattedPrice;
+    });
+    vehicleBrandNameElements.forEach(function (elemento) {
+      elemento.innerHTML = params.get('vehicleBrandName');
+    });
+    vehicleModelElements.forEach(function (elemento) {
+      elemento.innerHTML = params.get('vehicleModel');
+    });
+    vehicleLineNameElements.forEach(function (elemento) {
+      elemento.innerHTML = params.get('vehicleLineName');
+    });
+    vehicleEngineElements.forEach(function (elemento) {
+      elemento.innerHTML = params.get('vehicleEngine');
+    });
     expirationDate.innerHTML = params.get('expirationDate');
     validityFrom.innerHTML = params.get('validityFrom');
     var message = "Hola, ¿cómo estás? Estoy interesado(a) en el SOAT mi vehículo " + params.get('vehicleRegistration') + ".¿Me puedes ayudar? Gracias.";
     wpNumber.href = "https://api.whatsapp.com/send?phone=57" + params.get('wpNumber') + "&text=" + message;
+
+    var settings = {
+      // "url": "https://7x24.konethub.com/api/soat/car/" + placaValue,
+      "url": "http://localhost:8069/api/soat/cities",
+      "method": "GET",
+      "timeout": 0,
+      "headers": {
+        "Cookie": "frontend_lang=es; session_id=df9e04a9019a2c0d1107c1e3586cfcf8f87cd04a"
+      },
+    };
+
+    $.ajax(settings).done(function (response) {
+      if (preloader) {
+        preloader.classList.add("d-none");
+      }
+      if (response.success !== true) {
+        console.log(response);
+      } else {
+        let cities = response.data;
+        let citiesSelect = select("#cityId");
+        cities.forEach(element => {
+          let option = document.createElement("option");
+          option.value = element.name + " - " + element.state;
+          option.text = element.name + " - " + element.state;
+          citiesSelect.appendChild(option);
+        });
+
+      }
+    });
+
+    var settings = {
+      // "url": "https://7x24.konethub.com/api/soat/car/" + placaValue,
+      "url": "http://localhost:8069/api/soat/banks",
+      "method": "GET",
+      "timeout": 0,
+      "headers": {
+        "Cookie": "frontend_lang=es; session_id=df9e04a9019a2c0d1107c1e3586cfcf8f87cd04a"
+      },
+    };
+
+    $.ajax(settings).done(function (response) {
+      if (preloader) {
+        preloader.classList.add("d-none");
+      }
+      if (response.success !== true) {
+        console.log(response);
+      } else {
+        let banks = response.data;
+        let banksSelect = select("#bankId");
+        banks.forEach(element => {
+          let option = document.createElement("option");
+          option.value = element.code;
+          option.text = element.name;
+          banksSelect.appendChild(option);
+        });
+
+      }
+    });
+
   }
+
+  /**
+ * Send Form Data
+ * */
+
+  on('click', '#send-form-id', function (e) {
+    let preloader = select('#preloader');
+    if (preloader) {
+      preloader.classList.remove("d-none");
+    }
+    let typeDocument = select("#typeDocumentId").value;
+    let numberDocument = select("#numberDocumentId").value;
+    let email = select("#emailId").value;
+    let phone = select("#phoneId").value;
+    let address = select("#addressId").value;
+    let city = select("#cityId").value;
+    let sexRadio = document.querySelector('input[name="sexRadio"]:checked').value;
+    let placaValue = params.get('vehicleRegistration');
+    let leadId = params.get('leadId');
+    let checkoutStep1Elements = document.querySelectorAll('.checkout-step1');
+    let checkoutStep2Elements = document.querySelectorAll('.checkout-step2');
+    let soatCompany = document.getElementById("soatCompanyId");
+    let namePartner = document.getElementById("namePartnerId");
+
+    var settings = {
+      // "url": "https://7x24.konethub.com/api/soat/car/" + placaValue,
+      "url": "http://localhost:8069/api/soat/partner",
+      "method": "POST",
+      "timeout": 0,
+      "headers": {
+        "Cookie": "frontend_lang=es; session_id=df9e04a9019a2c0d1107c1e3586cfcf8f87cd04a"
+      },
+      "data": JSON.stringify({
+        identification_type: typeDocument,
+        identification: numberDocument,
+        email_address: email,
+        mobile_phone: phone,
+        address: address,
+        vehicle_circulation_city: city,
+        gender: sexRadio,
+        placa: placaValue,
+        lead_id: leadId
+      })
+    };
+
+    $.ajax(settings).done(function (response) {
+      if (preloader) {
+        preloader.classList.add("d-none");
+      }
+      if (response.success !== true) {
+        console.log(response);
+      } else {
+        checkoutStep1Elements.forEach(function (elemento) {
+          elemento.classList.add("d-none");
+        });
+        checkoutStep2Elements.forEach(function (elemento) {
+          elemento.classList.remove("d-none");
+        });
+        soatCompany.innerHTML = response.data.soat_company;
+        namePartner.innerHTML = response.data.name;
+        console.log(response.data)
+      }
+    });
+  });
+
+
+  /**
+   * Select method payment
+   * */
+
+  document.querySelectorAll('.card-method').forEach(function (card) {
+    card.addEventListener('click', function (e) {
+      let cardMethodPse = document.getElementById("card-method-pse");
+      let circlBlankPse = cardMethodPse.querySelector("i.ri-checkbox-blank-circle-line");
+      let circlePse = cardMethodPse.querySelector("i.ri-checkbox-circle-line");
+      let cardMethodTc = document.getElementById("card-method-tc");
+      let circlBlankTC = cardMethodTc.querySelector("i.ri-checkbox-blank-circle-line");
+      let circleTc = cardMethodTc.querySelector("i.ri-checkbox-circle-line");
+      let payMethod = document.getElementById("payMethodId");
+      let modalPaymentTitle = document.getElementById("modal-title-id");
+
+
+      if (this.id === "card-method-pse") {
+        cardMethodPse.classList.add("select");
+        cardMethodTc.classList.remove("select");
+        circlBlankPse.classList.add("d-none");
+        circlePse.classList.remove("d-none");
+        circlBlankTC.classList.remove("d-none");
+        circleTc.classList.add("d-none");
+        payMethod.innerHTML = "PSE";
+        modalPaymentTitle.innerHTML = "PSE";
+
+      }
+      if (this.id === "card-method-tc") {
+        cardMethodTc.classList.add("select");
+        cardMethodPse.classList.remove("select");
+        circlBlankPse.classList.remove("d-none");
+        circlePse.classList.add("d-none");
+        circlBlankTC.classList.add("d-none");
+        circleTc.classList.remove("d-none");
+        payMethod.innerHTML = "Tarjeta de crédito";
+        modalPaymentTitle.innerHTML = "Tarjeta de Crédito/Debito";
+
+      }
+    });
+  });
+
+  function sleep(milliseconds) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+  }
+
+  /**
+ * Payment
+ * */
+
+  on('click', '#actionPayId', function (e) {
+    let modal = new bootstrap.Modal(document.getElementById('modalPayId'));
+    let modalPaymentBody = select("#modalBodyPayId");
+    let modalSnipperPay = select("#modalSnipperPayId");
+    modal.show();
+    console.log(modalPaymentBody);
+    setTimeout(function () {
+      modalPaymentBody.innerHTML = "¡Ocurrió un error!, pronto un asesor te contactará para terminar el proceso de compra.";
+      modalSnipperPay.classList.add("d-none");
+    }, 2000);
+
+
+  });
 
 
 })()
+
 
